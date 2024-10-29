@@ -2,6 +2,11 @@
 #include <core.h>
 #include <vector>
 
+enum class ObjectType {
+    Object,
+    Mesh,
+    Scene
+};
 
 class Object {
 public:
@@ -25,6 +30,7 @@ public:
     Object* getParent() const;
     std::vector<Object*> getChildren() const;
     void addChild(Object *child);
+    ObjectType getObjectType() const;
 
 protected:
     glm::vec3 mPosition{0.0f};
@@ -36,6 +42,7 @@ protected:
     // 父子关系添加代码
     std::vector<Object*> mChildren {};
     Object *mParent{nullptr};
+    ObjectType mType{ObjectType::Object};
 
 
 };

@@ -37,7 +37,7 @@ CameraControl *cameraControl = nullptr;
 Geometry *geometry = nullptr;
 
 Renderer *renderer = nullptr;
-std::vector<Mesh *> meshes{};
+Scene *scene = nullptr;
 Directionallight *directionalLight = nullptr;
 PointLight *pointLight = nullptr;
 SpotLight *spotLight = nullptr;
@@ -78,6 +78,8 @@ void prepareCamera() {
 }
 
 void prepare() {
+    scene = new Scene();
+
     // 创建Geometry
     auto box = Geometry::createBox(3.0f);
     // 创建Material材质
@@ -87,7 +89,7 @@ void prepare() {
     material01->mSpecularMask = new Texture("assets/textures/sp_mask.png", 1);
     // 创建mesh
     auto mesh01 = new Mesh(box, material01);
-    meshes.push_back(mesh01);
+    scene->addChild(mesh01);
 
 
 
@@ -96,19 +98,14 @@ void prepare() {
     auto material02 = new WhiteMaterial();
     auto mesh02 = new Mesh(lightBall, material02);
     mesh02->setPosition(glm::vec3(0.0f, 0, 3));
-    meshes.push_back(mesh02);
+    scene->addChild(mesh02);
 
 
     // 创建上方球球
     auto upBall = Geometry::createSphere(1.0);
     auto mesh03 = new Mesh(upBall, material02);
     mesh03->setPosition(glm::vec3(0.0f, 4.0f, 0.0f));
-    meshes.push_back(mesh03);
-
     mesh01->addChild(mesh03);
-
-
-
 
     // 设置光源光照属性
 
@@ -131,25 +128,7 @@ void prepare() {
     renderer = new Renderer();
 }
 
-void lightTransformRotate() {
-    float time = glfwGetTime();
-    auto poz = pointLight->getPosition().z;
-    // std::cout << poz << std::endl;
-    meshes[1]->setPosition(glm::vec3(-10 * sin(time), 0, 10 * cos(time)));
-    pointLight->setPosition(glm::vec3(-10 * sin(time), 0, 10 * cos(time)));
-    spotLight->setPosition(glm::vec3(-10 * sin(time), 0, 10 * cos(time)));
-}
 
-void lightTransformTranslate() {
-	float xPos = glm::sin(glfwGetTime()) + 3.0f;
-	meshes[1]->setPosition(glm::vec3(0.0f, 0.0f, xPos));
-	pointLight->setPosition(glm::vec3(0.0f, 0.0f, xPos));
-    spotLight->setPosition(glm::vec3(0.0f, 0.0f, xPos));
-}
-
-void rotateBox() {
-    meshes[0]-> rotateX(0.5f);
-}
 
 void initImageui() {
     ImGui::CreateContext();
@@ -205,12 +184,11 @@ int main() {
     while (lwapp->update()) {
         // lightTransformRotate(); // 绕箱子旋转
         // lightTransformTranslate();
-        rotateBox();
 
         cameraControl->update();
         // renderer->render(meshes, camera, directionalLight, ambientLight);
         renderer->setClearColor(clearColor.r, clearColor.g, clearColor.b, 1.0);
-        renderer->render(meshes, camera, spotLight, ambientLight);
+        renderer->render(scene, camera, directionalLight, ambientLight);
         renderIMGUI();
     }
     lwapp->destroy();

@@ -66,3 +66,7 @@ void Object::addChild(Object *child) {
     }
     child->mParent = this;
 }
+
+ObjectType Object::getObjectType() const {
+    return mType;
+}

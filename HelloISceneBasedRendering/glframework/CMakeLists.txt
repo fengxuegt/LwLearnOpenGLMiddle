@@ -26,7 +26,9 @@ add_library(glframework STATIC shader.cpp
         light/pointlight.cpp
         light/pointlight.h
         light/spotlight.cpp
-        light/spotlight.h)
+        light/spotlight.h
+        scene.cpp
+        scene.h)
 
 # 将 wrapper 目录的头文件路径设置为 PUBLIC，使主项目也可以访问
 target_include_directories(glframework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
