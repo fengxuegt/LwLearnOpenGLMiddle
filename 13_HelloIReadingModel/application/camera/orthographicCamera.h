@@ -1,6 +1,6 @@
 
 
-#pragma onceßß
+#pragma once
 #include <camera.h>
 
 class OrthographicCamera : public Camera{

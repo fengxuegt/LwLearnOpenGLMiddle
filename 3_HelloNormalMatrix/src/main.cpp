@@ -45,8 +45,8 @@ void OnCursor(double x, double y);
 void OnScroll(double y);
 
 void prepareTexture() {
-    Texture* textureObj1 = new Texture("assets/textures/container.jpg", 0);
-    Texture* textureObj2 = new Texture("assets/textures/container.jpg", 1);
+    Texture* textureObj1 = new Texture("assets/textures/earth.png", 0);
+    Texture* textureObj2 = new Texture("assets/textures/earth.png", 1);
 }
 
 void prepareShaderClass() {
@@ -89,7 +89,7 @@ void render() {
 }
 
 void doTransform() {
-    transform = glm::rotate(transform, 0.03f, glm::vec3(0.0f, 1.0f, 1.0f));
+    transform = glm::rotate(transform, 0.005f, glm::vec3(0.0f, 1.0f, 1.0f));
 }
 
 void prepareCamera() {

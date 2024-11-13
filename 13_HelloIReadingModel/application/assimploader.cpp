@@ -48,7 +48,7 @@ void AssimpLoader::processNode(aiNode *ainode, Object *parent, const aiScene *sc
 	for (int i =0; i < ainode->mNumMeshes; i++) {
 		int meshID = ainode->mMeshes[i];
 		aiMesh *ai_mesh = scene->mMeshes[meshID];
-		auto  mesh = processMesh(ai_mesh);
+		auto  mesh = processMesh(ai_mesh, scene);
 		node->addChild(mesh);
 	}
 

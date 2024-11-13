@@ -92,17 +92,17 @@ void prepare() {
 
 
     // 创建光源物体
-    auto lightBall = Geometry::createSphere(0.5f);
+    auto lightBall = Geometry::createSphere(0.3f);
     auto material02 = new WhiteMaterial();
     auto mesh02 = new Mesh(lightBall, material02);
-    mesh02->setPosition(glm::vec3(0.0f, 0, 3));
+    mesh02->setPosition(glm::vec3(0.0f, 0, 4));
     meshes.push_back(mesh02);
 
 
     // 创建上方球球
-    auto upBall = Geometry::createSphere(1.0);
-    auto mesh03 = new Mesh(upBall, material02);
-    mesh03->setPosition(glm::vec3(0.0f, 4.0f, 0.0f));
+    auto upBall = Geometry::createSphere(0.5);
+    auto mesh03 = new Mesh(upBall, material01);
+    mesh03->setPosition(glm::vec3(0.0f, 2.0f, 0.0f));
     meshes.push_back(mesh03);
 
     mesh01->addChild(mesh03);
@@ -127,7 +127,7 @@ void prepare() {
 
     directionalLight = new Directionallight();
     ambientLight = new Ambientlight();
-    ambientLight->mColor = glm::vec3(0.1f, 0.1f, 0.1f);
+    ambientLight->mColor = glm::vec3(0.3f, 0.3f, 0.3f);
     renderer = new Renderer();
 }
 
