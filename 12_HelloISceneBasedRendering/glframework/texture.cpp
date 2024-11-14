@@ -11,10 +11,12 @@
 
 
 Texture::Texture(const std::string &filePath, int texture) {
+    std::cout << "Loading texture " << filePath << std::endl;
     mUnit = texture;
     int channels;
     stbi_set_flip_vertically_on_load(true);
     unsigned char *data = stbi_load(filePath.c_str(), &mWidth, &mHeight, &channels, STBI_rgb_alpha);
+    std::cout<<data<<std::endl;
     if (!data) {
         std::cerr << "Failed to load image: " << filePath << std::endl;
     }

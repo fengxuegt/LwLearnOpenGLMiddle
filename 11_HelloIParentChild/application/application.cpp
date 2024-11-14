@@ -49,7 +49,7 @@ void Application::cursorCallback(GLFWwindow *window, double xpos, double ypos) {
 }
 
 void Application::scrollCallback(GLFWwindow *window, double xoffset, double yoffset) {
-    std::cout << "scrollCallback" << std::endl;
+    // std::cout << "scrollCallback" << std::endl;
     Application *self = (Application*) glfwGetWindowUserPointer(window);
     if (self->mScrollCallback != nullptr) {
         self->mScrollCallback(yoffset);
