@@ -112,13 +112,21 @@ Mesh * AssimpLoader::processMesh(aiMesh *mesh, const aiScene* scene, const std::
 
 	// 处理材质
 	if (mesh->mMaterialIndex >= 0) {
-		Texture * texture = nullptr;
+		Texture * diffuse = nullptr;
 		aiMaterial *aimaterial = scene->mMaterials[mesh->mMaterialIndex];
-		texture = processTexture(aimaterial, aiTextureType_DIFFUSE, scene, rootPath);
-		if (!texture) {
-			texture = Texture::createTexture("assets/textures/awesomeface.png", 0);
+		diffuse = processTexture(aimaterial, aiTextureType_DIFFUSE, scene, rootPath);
+		if (!diffuse) {
+			diffuse = Texture::createTexture("assets/textures/awesomeface.png", 0);
 		}
-		material->mDiffuse = texture;
+		material->mDiffuse = diffuse;
+
+		Texture * specular = nullptr;
+		diffuse = processTexture(aimaterial, aiTextureType_SPECULAR, scene, rootPath);
+		if (!specular) {
+			specular = Texture::createTexture("assets/textures/awesomeface.png", 0);
+		}
+		material->mSpecularMask = specular;
+
 	} else {
 		material->mDiffuse = new Texture("assets/textures/awesomeface.png", 0);
 	}

@@ -9,6 +9,6 @@ public:
 public:
     Texture* mDiffuse{nullptr};
     Texture* mSpecularMask{nullptr};
-    float mShininess{1.0};
+    float mShininess{0.1};
 
 };

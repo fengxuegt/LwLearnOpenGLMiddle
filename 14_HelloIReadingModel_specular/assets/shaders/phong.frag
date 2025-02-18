@@ -58,9 +58,9 @@ vec3 calculateSpecular(vec3 lightColor, vec3 lightDir, vec3 normal, vec3 viewDir
 
   //3 控制光斑大小
   specular = pow(specular, shiness);
-
+  float specularMask = texture(texture2, uv).r;
   //4 计算最终颜色
-  vec3 specularColor = lightColor * specular * flag * intensity;
+  vec3 specularColor = lightColor * specular * flag * intensity * specularMask;
 
   return specularColor;
 }
@@ -131,6 +131,9 @@ void main()
   vec3 ambientColor = objectColor * ambientColor;
 
   vec3 finalColor = result + ambientColor;
+  float flag = step(800, gl_FragCoord.x);
+  vec3 blendColor = mix(vec3(1.0, 0, 0), vec3(0, 0, 1), flag);
+  finalColor += blendColor;
 
   FragColor = vec4(finalColor, 1.0);
 }

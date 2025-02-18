@@ -261,8 +261,8 @@ void Renderer::renderObject(Object *object, Camera *camera, Directionallight *li
                 // 将纹理单元与采样器联系起来
                 shader->setInt("sampler",0);
                 phMaterial->mDiffuse->bind();
-                // shader->setInt("texture2",1);
-                // phMaterial->mSpecularMask->bind();
+                shader->setInt("texture2",1);
+                phMaterial->mSpecularMask->bind();
                 // mvp变换矩阵 modelMatrix
                 shader->setMat4("transform", mesh->getModelMatrix());
 

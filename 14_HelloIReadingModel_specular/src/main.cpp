@@ -132,7 +132,7 @@ void renderIMGUI() {
 }
 
 int main() {
-    if (!lwapp->init(800, 600, "HelloReadingModel")) {
+    if (!lwapp->init(1600, 900, "HelloReadingModel_specular")) {
         return -1;
     }
     // 设置回调函数
